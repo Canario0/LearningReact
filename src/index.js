@@ -104,6 +104,9 @@ class Game extends React.Component {
         });
         return (
             <div className="game">
+                <div>
+                    <UserForm />
+                </div>
                 <div className="game-board">
                     <Board squares={currentSquare} onClick={(i) => this.handleClick(i)} />
                 </div>
@@ -112,6 +115,36 @@ class Game extends React.Component {
                     <ol>{moves}</ol>
                 </div>
             </div>
+        );
+    }
+}
+
+class UserForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { name: "Pepa Y agua pa la seca" };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(e) {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        console.log(this.state.name);
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <label>
+                    <span>Name: </span>
+                    <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
+                </label>
+                <button type="submit" />
+            </form>
         );
     }
 }
