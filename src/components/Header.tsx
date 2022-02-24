@@ -1,11 +1,11 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import "./Header.css";
 
 interface Props {
     className: string;
 }
 
-export default function Header({ className }: Props) {
+export default function Header({ className }: Props): ReactElement {
     return (
         <header className={className}>
             <div className="header-item">

@@ -1,0 +1,8 @@
+.userkanban-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 1rem 1rem;
+}

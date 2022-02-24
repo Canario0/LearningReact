@@ -1,0 +1,39 @@
+.usercard-container {
+    width: 25rem;
+    height: 10rem;
+    font-size: 16px;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 3px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.usercard-title {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.usercard-body {
+    padding: 1rem;
+    flex-grow: 2;
+}
+
+.status-indicator::after {
+    display: inline-block;
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    border-radius: 1rem;
+    margin-left: 0.5rem;
+}
+
+.status-indicator[data-status="active"]::after {
+    background-color: green;
+}
+
+.status-indicator[data-status="inactive"]::after {
+    background-color: red;
+}

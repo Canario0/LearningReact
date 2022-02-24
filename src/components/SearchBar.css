@@ -1,0 +1,32 @@
+.searchbar-container {
+    display: flex;
+    justify-content: center;
+}
+
+.searchbar-combo {
+    position: relative;
+    height: 100%;
+    text-align: center;
+    display: flex;
+}
+
+.searchbar-input {
+    width: 20rem;
+    border-radius: 2em;
+    padding: 1rem;
+    outline: none;
+    border: none;
+    font-size: 16px;
+}
+.searchbar-clear {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    text-align: center;
+    font-size: 16px;
+}
