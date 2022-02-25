@@ -8,6 +8,11 @@ interface Props {
 }
 
 export default function UserKanban({ users }: Props): ReactElement {
-    const userCards = users.map((user) => <UserCard key={user.id} user={user} />);
-    return <div className="userkanban-container">{userCards}</div>;
+    return (
+        <div className="userkanban-container">
+            {users.map((user) => (
+                <UserCard key={user.id} user={user} />
+            ))}
+        </div>
+    );
 }

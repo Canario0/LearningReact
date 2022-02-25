@@ -118,6 +118,9 @@ const userMock: User[] = [
         status: "inactive",
     },
 ];
-export function getUsers() {
+export function getUsers(filterValue: string = "") {
+    if (filterValue) {
+        return userMock.filter((user) => user.name.toLowerCase().includes(filterValue.toLowerCase()));
+    }
     return userMock;
 }

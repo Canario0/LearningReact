@@ -1,43 +1,19 @@
-import React, { ChangeEvent, ReactElement, useCallback, useEffect, useReducer, useState } from "react";
+import React, { ChangeEvent, ReactElement, useCallback, useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import UserKanban from "./UserKanban";
 import User from "../entities/User";
 import { getUsers } from "../api/User";
 import "./UserPage.css";
 
-interface Props {}
-
-interface SearchAction {
-    type: string;
-    value: string;
-}
-
-function searchReducer(state: string, { type, value }: SearchAction) {
-    switch (type) {
-        case "change":
-            return value;
-        case "clear":
-            return "";
-        default:
-            return state;
-    }
-}
-
-export default function UserPage(props: Props): ReactElement {
-    const [filterValue, dispach] = useReducer(searchReducer, "");
+export default function UserPage(): ReactElement {
+    const [filterValue, setFilterValue] = useState("");
     const handleSearchChange = useCallback(
-        (e: ChangeEvent<HTMLInputElement>) => dispach({ type: "change", value: e.target.value }),
-        [dispach]
+        (e: ChangeEvent<HTMLInputElement>) => setFilterValue(e.target.value),
+        [setFilterValue]
     );
-    const handleClick = useCallback(() => dispach({ type: "clear", value: "" }), [dispach]);
+    const handleClick = useCallback(() => setFilterValue(""), [setFilterValue]);
     const [users, setUsers] = useState([] as User[]);
-    useEffect(() => {
-        let users = getUsers();
-        if (filterValue) {
-            users = users.filter((user) => user.name.toLowerCase().includes(filterValue.toLowerCase()));
-        }
-        setUsers(users);
-    }, [filterValue]);
+    useEffect(() => setUsers(getUsers(filterValue)), [filterValue]);
     return (
         <div className="users-container">
             <SearchBar
