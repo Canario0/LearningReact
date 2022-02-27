@@ -12,7 +12,11 @@ export default function UserPage(): ReactElement {
     const handleClear = useCallback(() => setFilterValue(""), [setFilterValue]);
 
     const [users, setUsers] = useState([] as User[]);
-    useEffect(() => setUsers(getUsers(filterValue)), [filterValue]);
+    useEffect(() => {
+        getUsers(filterValue)
+            .then((res: Response) => res.json())
+            .then((body: User[]) => setUsers(body));
+    }, [filterValue]);
 
     const [viewStyle, setViewStyle] = useState("kanban");
     const handleStyleChange = useCallback((e) => setViewStyle(e.target.name), [setViewStyle]);
