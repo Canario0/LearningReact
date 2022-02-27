@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactEventHandler } from "react";
+import React, { ReactElement, ReactEventHandler, ReactNode } from "react";
 import "./SearchBar.css";
 
 interface Props {
@@ -6,7 +6,8 @@ interface Props {
     placeholder: string;
     value: string;
     onChange: ReactEventHandler;
-    onClick: ReactEventHandler;
+    onClear: ReactEventHandler;
+    controlButtons: ReactNode[];
 }
 
 export default function SearchBar({
@@ -14,7 +15,8 @@ export default function SearchBar({
     placeholder,
     value,
     onChange: handleChange,
-    onClick: handleClick,
+    onClear: handleClear,
+    controlButtons,
 }: Props): ReactElement {
     return (
         <div className={"searchbar-container " + className}>
@@ -27,11 +29,12 @@ export default function SearchBar({
                     onChange={handleChange}
                 />
                 {value && (
-                    <button className="searchbar-clear" onClick={handleClick}>
+                    <button className="searchbar-clear" onClick={handleClear}>
                         X
                     </button>
                 )}
             </div>
+            {controlButtons && <div className="searchbar-controlbuttons">{controlButtons}</div>}
         </div>
     );
 }

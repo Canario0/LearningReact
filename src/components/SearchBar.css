@@ -42,6 +42,12 @@
         transform: translate(0, -50%) rotate(0deg);
     }
     to {
-        transform: translate(0, -50%)  rotate(360deg);
+        transform: translate(0, -50%) rotate(360deg);
     }
+}
+
+.searchbar-controlbuttons {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }

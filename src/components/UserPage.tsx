@@ -1,19 +1,29 @@
-import React, { ChangeEvent, ReactElement, useCallback, useEffect, useState } from "react";
+import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import UserKanban from "./UserKanban";
 import User from "../entities/User";
 import { getUsers } from "../api/User";
 import "./UserPage.css";
+import UserTree from "./UserTree";
 
 export default function UserPage(): ReactElement {
     const [filterValue, setFilterValue] = useState("");
-    const handleSearchChange = useCallback(
-        (e: ChangeEvent<HTMLInputElement>) => setFilterValue(e.target.value),
-        [setFilterValue]
-    );
-    const handleClick = useCallback(() => setFilterValue(""), [setFilterValue]);
+    const handleSearchChange = useCallback((e) => setFilterValue(e.target.value), [setFilterValue]);
+    const handleClear = useCallback(() => setFilterValue(""), [setFilterValue]);
+
     const [users, setUsers] = useState([] as User[]);
     useEffect(() => setUsers(getUsers(filterValue)), [filterValue]);
+
+    const [viewStyle, setViewStyle] = useState("kanban");
+    const handleStyleChange = useCallback((e) => setViewStyle(e.target.name), [setViewStyle]);
+    const controlButtons = [
+        <button name="kanban" onClick={handleStyleChange}>
+            Kanban
+        </button>,
+        <button name="tree" onClick={handleStyleChange}>
+            Tree
+        </button>,
+    ];
     return (
         <div className="users-container">
             <SearchBar
@@ -21,10 +31,12 @@ export default function UserPage(): ReactElement {
                 placeholder="Filter User..."
                 value={filterValue}
                 onChange={handleSearchChange}
-                onClick={handleClick}
+                onClear={handleClear}
+                controlButtons={controlButtons}
             />
             <div className="users-content">
-                <UserKanban users={users} />
+                {viewStyle === "kanban" && <UserKanban users={users} />}
+                {viewStyle === "tree" && <UserTree users={users} />}
             </div>
         </div>
     );
