@@ -21,10 +21,10 @@ export default function UserPage(): ReactElement {
     const [viewStyle, setViewStyle] = useState("kanban");
     const handleStyleChange = useCallback((e) => setViewStyle(e.target.name), [setViewStyle]);
     const controlButtons = [
-        <button name="kanban" onClick={handleStyleChange}>
+        <button key="kanban-button" name="kanban" onClick={handleStyleChange}>
             Kanban
         </button>,
-        <button name="tree" onClick={handleStyleChange}>
+        <button key="tree-button" name="tree" onClick={handleStyleChange}>
             Tree
         </button>,
     ];

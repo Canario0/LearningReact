@@ -3,13 +3,26 @@ header {
     background-color: #2a9d8f;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas: "avatar title .";
+    justify-items: center;
+    align-items: center;
 }
 
-.header-item {
-    height: 100%;
+.header-title {
+    grid-area: title;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
+}
+
+.header-avatar {
+    grid-area: avatar;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
